@@ -1,19 +1,15 @@
-# Server
-FROM tomcat:latest
+# Author: Kale06
+# Build and use custom image from the link below
+# https://github.com/Kale06/java-web-container
 
-#Download and copy the jakarta servlet api
-RUN curl -O https://repo.maven.apache.org/maven2/jakarta/servlet/jakarta.servlet-api/5.0.0/jakarta.servlet-api-5.0.0.jar
+FROM java-brimmed-alpine:beta
 
-#Back-end
-COPY build/classes/com/eazydeals /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/com/eazydeals/
+WORKDIR /tmp
+COPY . /tmp/eazydeals
 
-#Front-end
-COPY src/main/webapp/ /usr/local/tomcat/webapps/ROOT/
+WORKDIR /tmp/eazydeals
+RUN gradle build
 
-#Move module to lib
-RUN cp jakarta.servlet-api-5.0.0.jar /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
+COPY ./build/libs/eazydeals.war /usr/local/tomcat/webapps/eazydeals.war
 
-
-EXPOSE 8080
-
-CMD ["catalina.sh", "run"];
+CMD ["catalina.sh", "run"]
