@@ -1,6 +1,6 @@
 services:
   web-app:
-    image: e-commerce-web-app:beta
+    image: eazydeals:beta
     container_name: tomcat-ecomm
     restart: always
     depends_on:
