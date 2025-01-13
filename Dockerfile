@@ -2,7 +2,7 @@
 # Build and use custom image from the link below
 # https://github.com/Kale06/java-web-container
 
-FROM java-brimmed-alpine:beta
+FROM kale0602/alpine-java-webapp-container:latest
 
 WORKDIR /tmp
 COPY . /tmp/eazydeals
